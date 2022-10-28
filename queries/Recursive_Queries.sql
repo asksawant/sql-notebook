@@ -17,10 +17,10 @@ SELECT * FROM cte_name;
 
 WITH RECURSIVE numbers AS (
 	SELECT 1 AS n
-    UNION ALL
-    SELECT n + 1
-    FROM numbers
-    WHERE n < 10 -- termination condition
+	UNION ALL
+	SELECT n + 1
+	FROM numbers
+	WHERE n < 10 -- termination condition
 )
 SELECT * FROM numbers;
 
@@ -29,29 +29,29 @@ SELECT * FROM numbers;
 WITH RECURSIVE emp_hier AS(
 	SELECT
 		emp_id,
-        first_name,
-        last_name,
-        super_id,
-        1 AS lvl
-    FROM employee
-    WHERE first_name = 'David'
-    UNION ALL
-    SELECT
+		first_name,
+		last_name,
+		super_id,
+		1 AS lvl
+	FROM employee
+	WHERE first_name = 'David'
+	UNION ALL
+	SELECT
 		e.emp_id,
-        e.first_name,
-        e.last_name,
-        e.super_id,
-        h.lvl + 1 AS lvl
-    FROM emp_hier h
-    JOIN employee e
+		e.first_name,
+		e.last_name,
+		e.super_id,
+		h.lvl + 1 AS lvl
+	FROM emp_hier h
+	JOIN employee e
 		ON h.emp_id = e.super_id
 )
 SELECT
 	h2.emp_id AS 'Employee Id',
-    h2.first_name AS 'First Name',
-    h2.last_name AS 'Last Name',
-    e2.first_name AS 'Supervisor Name',
-    h2.lvl AS 'Hierarchy'
+	h2.first_name AS 'First Name',
+	h2.last_name AS 'Last Name',
+	e2.first_name AS 'Supervisor Name',
+	h2.lvl AS 'Hierarchy'
 FROM emp_hier h2
 LEFT JOIN employee e2
 	ON e2.emp_id = h2.super_id;
@@ -61,29 +61,29 @@ LEFT JOIN employee e2
 WITH RECURSIVE emp_hier AS(
 	SELECT
 		emp_id,
-        first_name,
-        last_name,
-        super_id,
-        1 AS lvl
-    FROM employee
-    WHERE first_name = 'Son'
-    UNION ALL
-    SELECT
+		first_name,
+		last_name,
+		super_id,
+		1 AS lvl
+	FROM employee
+	WHERE first_name = 'Son'
+	UNION ALL
+	SELECT
 		e.emp_id,
-        e.first_name,
-        e.last_name,
-        e.super_id,
-        h.lvl + 1 AS lvl
-    FROM emp_hier h
-    JOIN employee e
+		e.first_name,
+		e.last_name,
+		e.super_id,
+		h.lvl + 1 AS lvl
+	FROM emp_hier h
+	JOIN employee e
 		ON h.super_id = e.emp_id -- Only change
 )
 SELECT
 	h2.emp_id AS 'Employee Id',
-    h2.first_name AS 'First Name',
-    h2.last_name AS 'Last Name',
-    e2.first_name AS 'Supervisor Name',
-    h2.lvl AS 'Hierarchy'
+	h2.first_name AS 'First Name',
+	h2.last_name AS 'Last Name',
+	e2.first_name AS 'Supervisor Name',
+	h2.lvl AS 'Hierarchy'
 FROM emp_hier h2
 LEFT JOIN employee e2
 	ON e2.emp_id = h2.super_id;
