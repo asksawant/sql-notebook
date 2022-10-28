@@ -7,9 +7,9 @@ USE companydb;
 -- Recursive CTE Syntax
 
 WITH RECURSIVE cte_name AS (
-SELECT _query (non_recursive_query or the base_query)
-UNION ALL
-SELECT _query (recursive_query_using_cte_name (with_a_termination_condition))
+	SELECT _query (non_recursive_query or the base_query)
+	UNION ALL
+	SELECT _query (recursive_query_using_cte_name (with_a_termination_condition))
 )
 SELECT * FROM cte_name;
 
